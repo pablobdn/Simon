@@ -1,0 +1,121 @@
+html {
+    box-sizing: border-box;
+  }
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+
+body
+{
+    height: 100vh;
+    font-family: 'Oswald', sans-serif;
+}
+
+.site-header, section
+{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.title, section
+{
+    margin: 0;
+    padding: 10px 0;
+}
+
+p
+{
+    margin: 0;
+}
+
+.game-board 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.simon
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 400px;
+    margin: auto;
+    position: relative;
+}
+
+.button
+{
+    display: inline-block;
+    margin: 0;
+    height: 200px;
+    width: 200px;
+    transition: border .3s ease;
+}
+
+.button:hover
+{
+    
+    border: 5px solid black;
+}
+
+
+.green
+{
+    background-color: green;
+    border-radius: 100% 0 0 0;
+}
+
+.green .light
+{
+    background-color: #52EE13;
+}
+
+.red
+{
+    background-color: red;
+    border-radius: 0 100% 0 0;
+}
+
+.red .light
+{
+    background-color: #FF6666;
+}
+
+.yellow
+{
+    background-color: #F79909;
+    border-radius: 0 0 0 100%;
+}
+
+.yellow.light
+{
+    background-color: #FAEF08;
+}
+
+.blue
+{
+    background-color: blue;
+    border-radius: 0 0 100% 0;
+}
+
+.blue.light
+{
+    background-color: #7AABFF
+}
+
+.startBtn
+{
+    position: absolute;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.startBtn:hover
+{
+    background-color: grey;
+}
