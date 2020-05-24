@@ -54,11 +54,6 @@ p
     transition: border .3s ease;
 }
 
-.button:hover
-{
-    
-    border: 5px solid black;
-}
 
 
 .green
@@ -67,7 +62,7 @@ p
     border-radius: 100% 0 0 0;
 }
 
-.green .light
+.green.light
 {
     background-color: #52EE13;
 }
@@ -78,7 +73,7 @@ p
     border-radius: 0 100% 0 0;
 }
 
-.red .light
+.red.light
 {
     background-color: #FF6666;
 }
@@ -118,4 +113,9 @@ p
 .startBtn:hover
 {
     background-color: grey;
+}
+
+.hide
+{
+    display: none;
 }
