@@ -4,6 +4,7 @@ const yellow = document.getElementById('yellow')
 const blue = document.getElementById('blue')
 
 const startBtn = document.getElementById('startBtn')
+const LAST_LEVEL = 2
 
 startBtn.addEventListener('click', startGame)
 
@@ -13,7 +14,7 @@ class Game
     {
         this.start()
         this.generator()
-        setTimeout( () => this.lightSequence(), 500) 
+        setTimeout( () => this.lightSequence(), 500)
         
     }
 
@@ -29,13 +30,11 @@ class Game
             blue
         ]
         startBtn.classList.add('hide')
-        
-
     }
     
     generator()
     {
-         this.list = new Array(10)
+         this.list = new Array(LAST_LEVEL)
 
         for(var i = 0; i < this.list.length; i++ )
         {
@@ -103,13 +102,23 @@ class Game
         {
             this.sequence++
 
+            
             if (this.sequence === this.level )
             {
-                this.level++
-                this.removeClicks()
-                setTimeout( () => this.nextLevel() , 1400)
-                console.log('next level')
+                if (this.sequence === LAST_LEVEL)
+                {
+                    setTimeout( () => this.youWin(), 200)
+                }
+                else 
+                {
+                    this.level++
+                    this.removeClicks()
+                    setTimeout( () => this.nextLevel() , 1400)
+                    console.log('next level')
+                }
+                
             }
+
         }
 
         else
@@ -144,12 +153,15 @@ class Game
         this.lightSequence()
     }
 
+    youWin()
+    {
+        swal("Simon Says", "You Win!", "success")
+    }
+    
     gameOver()
     {
-        alert('Game Over')
+        swal("Simon Says", "Game Over", "error");
     }
-
-    
 
 }
 
