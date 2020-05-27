@@ -19,7 +19,9 @@ class Game
 
     start()
     {
+        this.userInput = this.userInput.bind(this)
         this.level = 1
+        this.sequence = 0
         this.colors = [
             green,
             red,
@@ -50,20 +52,103 @@ class Game
         {
             const color = this.list[i]
             console.log(color)
-            setTimeout( () => this.turnOnColors(color), 2000 * i)
+            setTimeout( () => this.turnOnColors(color), 1000 * i)
         }
+        this.listenClick()
     }
 
     turnOnColors(color)
     {
         this.colors[color].classList.add('light')
-        setTimeout( () => this.turnOffColors(color), 1000)
+        setTimeout( () => this.turnOffColors(color), 500)
     }
 
     turnOffColors(color)
     {
         this.colors[color].classList.remove('light')
     }
+    
+
+    listenClick()
+    {
+        console.log('waiting user input ...')
+        green.addEventListener('click',  this.userInput )
+        red.addEventListener('click', this.userInput )
+        yellow.addEventListener('click', this.userInput)
+        blue.addEventListener('click', this.userInput )
+    }
+
+    removeClicks()
+    {
+        console.log('removing events')
+        green.removeEventListener('click',  this.userInput )
+        red.removeEventListener('click', this.userInput )
+        yellow.removeEventListener('click', this.userInput)
+        blue.removeEventListener('click', this.userInput )
+    }
+
+    
+
+    userInput(ev)
+    {
+        console.log(ev.target.id) // name of the id of color clicked
+        //Now, i want to light the color clicked
+        let colorName = ev.target.id
+        const numberColor = this.nameToNumber(colorName)
+        console.log(numberColor)
+        this.turnOnColors(numberColor)
+
+
+        if (numberColor === this.list[this.sequence])
+        {
+            this.sequence++
+
+            if (this.sequence === this.level )
+            {
+                this.level++
+                this.removeClicks()
+                setTimeout( () => this.nextLevel() , 1400)
+                console.log('next level')
+            }
+        }
+
+        else
+        {
+            this.gameOver()
+        }
+
+        
+    }
+
+    nameToNumber(colorName)
+    {
+        switch(colorName)
+        {
+            case 'green':
+                return 0
+
+            case 'red':
+                return 1
+
+            case 'yellow':
+                return 2
+            
+            case 'blue':
+                return 3
+        }
+    }
+
+    nextLevel()
+    {
+        this.sequence = 0
+        this.lightSequence()
+    }
+
+    gameOver()
+    {
+        alert('Game Over')
+    }
+
     
 
 }
