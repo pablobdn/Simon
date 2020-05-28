@@ -4,7 +4,7 @@ const yellow = document.getElementById('yellow')
 const blue = document.getElementById('blue')
 
 const startBtn = document.getElementById('startBtn')
-const LAST_LEVEL = 2
+const LAST_LEVEL = 10
 
 startBtn.addEventListener('click', startGame)
 
@@ -12,15 +12,17 @@ class Game
 {
     constructor()
     {
+        this.start = this.start.bind(this)
         this.start()
         this.generator()
-        setTimeout( () => this.lightSequence(), 500)
-        
+        setTimeout( () => this.nextLevel(), 800)
     }
 
     start()
     {
+        this.nextLevel = this.nextLevel.bind(this)
         this.userInput = this.userInput.bind(this)
+        this.toggleBtn()
         this.level = 1
         this.sequence = 0
         this.colors = [
@@ -29,7 +31,25 @@ class Game
             yellow,
             blue
         ]
-        startBtn.classList.add('hide')
+    }
+
+    toggleBtn()
+    {
+        if( startBtn.classList.contains('hide'))
+        {
+            startBtn.classList.remove('hide')
+        }
+        else
+        {
+            startBtn.classList.add('hide')
+        }
+    }
+
+    nextLevel()
+    {
+        this.sequence = 0
+        this.lightSequence()
+        this.listenClick()
     }
     
     generator()
@@ -53,7 +73,7 @@ class Game
             console.log(color)
             setTimeout( () => this.turnOnColors(color), 1000 * i)
         }
-        this.listenClick()
+        
     }
 
     turnOnColors(color)
@@ -126,7 +146,6 @@ class Game
             this.gameOver()
         }
 
-        
     }
 
     nameToNumber(colorName)
@@ -147,20 +166,26 @@ class Game
         }
     }
 
-    nextLevel()
-    {
-        this.sequence = 0
-        this.lightSequence()
-    }
-
     youWin()
     {
-        swal("Simon Says", "You Win!", "success")
+        swal("Simon Says", "You Win!", "success", {
+            button: "Play Again",
+          })
+        .then( () => {
+            this.removeClicks()
+            this.start()
+        })
     }
     
     gameOver()
     {
-        swal("Simon Says", "Game Over", "error");
+        swal("Simon Says", "Game Over", "error", {
+            button: "Play Again",
+          })
+        .then( () => {
+            this.removeClicks()
+            this.start()
+        })
     }
 
 }
