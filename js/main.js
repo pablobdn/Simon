@@ -31,6 +31,7 @@ class Game
             yellow,
             blue
         ]
+
     }
 
     toggleBtn()
@@ -127,7 +128,7 @@ class Game
             {
                 if (this.sequence === LAST_LEVEL)
                 {
-                    setTimeout( () => this.youWin(), 200)
+                    setTimeout( () => this.youWin(this.level), 200)
                 }
                 else 
                 {
@@ -143,7 +144,7 @@ class Game
 
         else
         {
-            this.gameOver()
+            this.gameOver(this.level)
         }
 
     }
@@ -166,7 +167,7 @@ class Game
         }
     }
 
-    youWin()
+    youWin(level)
     {
         swal("Simon Says", "You Win!", "success", {
             button: "Play Again",
@@ -175,9 +176,14 @@ class Game
             this.removeClicks()
             this.start()
         })
+
+        this.highScore(level)
     }
+
+
+
     
-    gameOver()
+    gameOver(level)
     {
         swal("Simon Says", "Game Over", "error", {
             button: "Play Again",
@@ -186,9 +192,34 @@ class Game
             this.removeClicks()
             this.start()
         })
+
+        this.highScore(level)
+
+        
+    }
+
+    highScore(level)
+    {
+        let highScore = document.getElementById('high-score')
+        highScore.innerHTML = level
+        localStorage.setItem('high-score', level)
     }
 
 }
+
+
+
+function showLastHighScore()
+{
+    if (localStorage.getItem('high-score') != null)
+    {
+        score = localStorage.getItem('high-score')
+        let highScore = document.getElementById('high-score')
+        highScore.innerHTML = score
+    }
+}
+
+showLastHighScore()
 
 function startGame()  
 {
