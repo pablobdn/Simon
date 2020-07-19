@@ -12,6 +12,12 @@ body
     font-family: 'Oswald', sans-serif;
 }
 
+.container
+{
+    max-width: 90%;
+    margin: 0 auto;
+}
+
 .site-header, section
 {
     text-align: center;
