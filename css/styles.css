@@ -12,22 +12,33 @@ body
     font-family: 'Oswald', sans-serif;
 }
 
+h1 {
+	margin: 0;
+	padding: 0;
+}
+
 .container
 {
     max-width: 90%;
     margin: 0 auto;
 }
 
-.site-header, section
-{
-    text-align: center;
-    margin-bottom: 50px;
+.header {
+	padding: 10px 0;
+	background-color: #24460A;
+	color: white;
+	margin-bottom: 50px;
 }
 
-.title, section
+.site-header, section
 {
+    text-align: center;	
+}
+
+section
+{
+	padding: 10px 0;
     margin: 0;
-    padding: 10px 0;
 }
 
 p

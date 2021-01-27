@@ -169,7 +169,7 @@ class Game
 
     youWin(level)
     {
-        swal("Simon Says", "You Win!", "success", {
+        swal("Simon", "You Win!", "success", {
             button: "Play Again",
           })
         .then( () => {
@@ -185,7 +185,7 @@ class Game
     
     gameOver(level)
     {
-        swal("Simon Says", "Game Over", "error", {
+        swal("Simon", "Game Over", "error", {
             button: "Play Again",
           })
         .then( () => {
